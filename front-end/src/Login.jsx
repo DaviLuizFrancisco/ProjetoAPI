@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Sapo from '/Imagens/frog.png'
+import Sapo from '/Imagens/frog.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -17,14 +17,20 @@ function Login() {
   };
 
   const handleLogin = async () => {
+    if (username.trim() === '' || password.trim() === '') {
+      alert('Por favor, preencha todos os campos.');
+      return;
+    }
+  
     try {
-      const response = await axios.get('http://127.0.0.1:8000/logins/', {
+      const response = await axios.post('http://127.0.0.1:8000/logins/', {
         username,
         password,
       });
-
+  
       if (response.status === 200) {
-        navigate('/Menu');
+        // Redirecionar para a próxima página
+        history.push('/Menu');
       } else {
         alert('Credenciais inválidas. Tente novamente.');
       }
@@ -39,7 +45,6 @@ function Login() {
       const response = await axios.post('http://127.0.0.1:8000/logins/', {
         username,
         password,
-        
       });
     } catch (error) {
       console.error(error);
@@ -55,8 +60,6 @@ function Login() {
       margin: '0 auto',
     },
   };
-  
-
 
   return (
     <div>

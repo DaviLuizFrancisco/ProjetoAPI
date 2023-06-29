@@ -9,5 +9,5 @@ router.register(r'logins', LoginViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('api/login', login_view.as_view(), name='login'),
+    path('logins/', login_view, name='login'),
 ]

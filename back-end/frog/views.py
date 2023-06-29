@@ -6,11 +6,11 @@ from frog.models import Login
 from frog.serializer import LoginSerializer
 
 
-class login_view(APIView):
-    def post(self, request):
+def login_view(request):
+    if request.method == 'POST':
         data = request.data
-        username = data['username']
-        password = data['password']
+        username = data.get('username')
+        password = data.get('password')
 
         user = authenticate(username=username, password=password)
         if user:
